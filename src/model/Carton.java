@@ -12,6 +12,7 @@ import java.util.Set;
  * @author ccore
  */
 public class Carton {
+
     private String id;
     private int[][] numeros;
     private boolean[][] marcados;
@@ -44,8 +45,16 @@ public class Carton {
         usados.add(valor);
     }
 
-    public boolean existeNumero(int n) {
-        return usados.contains(n);
+    public int[][] setNumeros() {
+        return numeros;
+    }
+
+    public void setNumeros(int[][] numeros) {
+        this.numeros = numeros;
+    }
+
+    public void setMarcados(boolean[][] marcados) {
+        this.marcados = marcados;
     }
 
     public void marcar(int n) {

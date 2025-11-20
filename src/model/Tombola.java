@@ -14,9 +14,13 @@ public class Tombola {
     private boolean[][] marcados;
     private boolean modoAutomatico;
     private Integer ultimoNumero;
+    private Integer tipoModo;
 
     public Tombola(boolean modoAutomatico) {
         this.modoAutomatico = modoAutomatico;
+        this.tipoModo = 0;
+        this.ultimoNumero = -1;
+        this.modoAutomatico = false;
         inicializar();
     }
 
@@ -69,13 +73,24 @@ public class Tombola {
         return ultimoNumero;
     }
 
+    public Integer getTipoModo() {
+        return tipoModo;
+    }
 
+    
     public void setModoAutomatico(boolean modoAutomatico) {
         this.modoAutomatico = modoAutomatico;
     }
 
     public void setUltimoNumero(Integer ultimoNumero) {
         this.ultimoNumero = ultimoNumero;
+    }
+
+    public void setTipoModo(int tipoModo) {
+        if (tipoModo < 0 || tipoModo > 3) {
+            throw new IllegalArgumentException("El valor tipoModo solo puede ser 0, 1, 2 o 3.");
+        }
+        this.tipoModo = tipoModo;
     }
 
     public void setMarcados(boolean[][] marcados) {
@@ -86,7 +101,14 @@ public class Tombola {
         }
     }
 
-    //Reiniciar tómbola
+    public void setNumeros(int[][] numeros) {
+        if (numeros == null || numeros.length != 5 || numeros[0].length != 15) {
+            throw new IllegalArgumentException("La matriz de números debe ser de 5 filas por 15 columnas.");
+        }
+        this.numeros = numeros;
+    }
+
+    //Reiniciar tombola
     public void reiniciar() {
         inicializar();
     }
