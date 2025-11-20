@@ -1,6 +1,5 @@
 package Controller;
 
-
 import java.util.List;
 import model.Carton;
 
@@ -8,25 +7,22 @@ import model.Carton;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author 8040d
  */
 public class GanadorController {
-    
+
     //VERIFICAR GANADOR SEGÚN EL MODO DE JUEGO
     /**
-     * modos posibles: 
-     * NORMAL = filas, columnas, diagonales o 4 esquinas
-     * ESQUINAS = solo cuatro esquinas 
-     * LLENO = cartel lleno
+     * modos posibles: NORMAL = filas, columnas, diagonales o 4 esquinas
+     * ESQUINAS = solo cuatro esquinas LLENO = cartel lleno
      */
     public boolean verificarGanador(Carton carton, List<Integer> numerosCantados, String modo) {
 
-        // Marcar números cantados
-        for (int n : numerosCantados) {
-            carton.marcar(n);
+        // ***** VALIDAR QUE TODA MARCA SEA VÁLIDA *****
+        if (!marcadosSonValidos(carton, numerosCantados)) {
+            return false;
         }
 
         switch (modo.toUpperCase()) {
@@ -44,7 +40,26 @@ public class GanadorController {
         }
     }
 
-    //VERIFICACIONES DE LÍNEAS (H, V, DIAGONAL)
+    // --- Validar que todo número marcado esté en la lista de cantados ---
+    private boolean marcadosSonValidos(Carton carton, List<Integer> numerosCantados) {
+
+        int[][] nums = carton.getNumeros();
+        boolean[][] marc = carton.getMarcados();
+
+        for (int f = 0; f < 5; f++) {
+            for (int c = 0; c < 5; c++) {
+                if (marc[f][c]) { // está marcado
+                    if (!numerosCantados.contains(nums[f][c])) {
+                        return false; // Marcó un número NO cantado → perdida
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // ----- LÍNEAS -----
     public boolean tieneLinea(Carton carton) {
         boolean[][] m = carton.getMarcados();
 
@@ -93,17 +108,15 @@ public class GanadorController {
         return diag1 || diag2;
     }
 
-    //VERIFICACIÓN SOLO CUATRO ESQUINAS
+    // ----- ESQUINAS -----
     public boolean tiene4Esquinas(Carton carton) {
         boolean[][] m = carton.getMarcados();
-
         return m[0][0] && m[0][4] && m[4][0] && m[4][4];
     }
 
-    //VERIFICAR CARTÓN LLENO
+    // ----- LLENO -----
     public boolean cartonLleno(Carton carton) {
         boolean[][] m = carton.getMarcados();
-
         for (int f = 0; f < 5; f++) {
             for (int c = 0; c < 5; c++) {
                 if (!m[f][c]) {

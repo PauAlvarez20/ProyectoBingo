@@ -1,6 +1,5 @@
 package Controller;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -118,51 +117,64 @@ public class CartonController {
         return carton;
     }
 
-    public JTable llenarTabla(DefaultTableModel modelo, Carton carton) {
+    public boolean verificarCarton(Carton carton) {
 
-        modelo.setRowCount(0);
+        int[][] numeros = carton.getNumeros();
 
-        int[][] nums = carton.getNumeros();
+        // Rangos válidos por columna
+        int[][] rangos = {
+            {1, 15},
+            {16, 30},
+            {31, 45},
+            {46, 60},
+            {61, 75}
+        };
 
-        for (int fila = 0; fila < 5; fila++) {
-            Object[] row = new Object[5];
-            for (int col = 0; col < 5; col++) {
-                row[col] = (nums[fila][col] == 0) ? "FREE" : nums[fila][col];
-            }
-            modelo.addRow(row);
-        }
+        for (int col = 0; col < 5; col++) {
+            int min = rangos[col][0];
+            int max = rangos[col][1];
 
-        return new JTable(modelo);
-    }
+            for (int fila = 0; fila < 5; fila++) {
 
-    public JTable llenarTablaConMarcados(JTable tabla, DefaultTableModel modelo, Carton carton) {
-
-        llenarTabla(modelo, carton);
-
-        boolean[][] marcados = carton.getMarcados();
-
-        tabla.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value,
-                    boolean isSelected, boolean hasFocus, int row, int column) {
-
-                Component c = super.getTableCellRendererComponent(table, value,
-                        isSelected, hasFocus, row, column);
-
-                if (marcados[row][column]) {
-                    c.setBackground(new Color(135, 206, 250)); // celeste
-                } else {
-                    c.setBackground(Color.WHITE);
+                // Saltar casilla central (FREE)
+                if (fila == 2 && col == 2) {
+                    continue;
                 }
 
-                setHorizontalAlignment(CENTER);
+                int valor = numeros[fila][col];
 
-                return c;
+                // Cero NO es válido (solo FREE)
+                if (valor == 0) {
+                    return false;
+                }
+
+                // Validar rango
+                if (valor < min || valor > max) {
+                    return false;
+                }
             }
-        });
+        }
 
-        tabla.repaint();
-        return tabla;
+        return true; // Todo correcto
+    }
+
+    public void ponerCeros(Carton carton) {
+
+        int[][] nums = carton.getNumeros();
+        boolean[][] marc = carton.getMarcados();
+
+        for (int f = 0; f < 5; f++) {
+            for (int c = 0; c < 5; c++) {
+
+                if (f == 2 && c == 2) {
+                    nums[f][c] = 0;
+                    marc[f][c] = true;
+                } else {
+                    nums[f][c] = 0;
+                    marc[f][c] = false;
+                }
+            }
+        }
     }
 
     public Carton marcarNumeroEnCarton(Carton carton, int numero) {
