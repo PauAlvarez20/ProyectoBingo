@@ -15,7 +15,7 @@ import model.Tombola;
 
 /**
  *
- * @author 8040d
+ * @author Pau
  */
 public class TombolaController {
     

@@ -18,7 +18,7 @@ import model.Carton;
  */
 /**
  *
- * @author 8040d
+ * @author Pau
  */
 public class CartonController {
 
