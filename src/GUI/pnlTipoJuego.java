@@ -6,12 +6,15 @@ package GUI;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import model.Tombola;
 
 /**
  *
- * @author CristianG
+ * @author Cjared
  */
 public class pnlTipoJuego extends javax.swing.JPanel {
+
+    private Tombola tombola;
 
     /**
      * Creates new form pnlTipoJuego
@@ -19,17 +22,21 @@ public class pnlTipoJuego extends javax.swing.JPanel {
     public pnlTipoJuego() {
         initComponents();
     }
-    
+
     public JPanel getPnlManual() {
-        return pnlManual;
-    }
-    
-    public JPanel getPnlAutomatico() {
         return pnlAutomatico;
     }
-    
+
+    public JPanel getPnlAutomatico() {
+        return pnlManual;
+    }
+
     public JButton getBtnVolver() {
         return btnVolver;
+    }
+
+    public void setTombola(Tombola t) {
+        this.tombola = t;
     }
 
     /**
@@ -41,50 +48,60 @@ public class pnlTipoJuego extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlAutomatico = new javax.swing.JPanel();
-        lblManual = new javax.swing.JLabel();
         pnlManual = new javax.swing.JPanel();
+        lblManual = new javax.swing.JLabel();
+        pnlAutomatico = new javax.swing.JPanel();
         lblAutomatico = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
 
-        pnlAutomatico.setBackground(new java.awt.Color(51, 51, 255));
-        pnlAutomatico.setPreferredSize(new java.awt.Dimension(140, 140));
+        pnlManual.setBackground(new java.awt.Color(51, 51, 255));
+        pnlManual.setPreferredSize(new java.awt.Dimension(140, 140));
+        pnlManual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlManualMouseClicked(evt);
+            }
+        });
 
         lblManual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblManual.setText("Manual");
-
-        javax.swing.GroupLayout pnlAutomaticoLayout = new javax.swing.GroupLayout(pnlAutomatico);
-        pnlAutomatico.setLayout(pnlAutomaticoLayout);
-        pnlAutomaticoLayout.setHorizontalGroup(
-            pnlAutomaticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAutomaticoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblManual, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlAutomaticoLayout.setVerticalGroup(
-            pnlAutomaticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAutomaticoLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(lblManual)
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
-
-        pnlManual.setBackground(new java.awt.Color(51, 51, 255));
-        pnlManual.setPreferredSize(new java.awt.Dimension(140, 140));
-
-        lblAutomatico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAutomatico.setText("Automatico");
 
         javax.swing.GroupLayout pnlManualLayout = new javax.swing.GroupLayout(pnlManual);
         pnlManual.setLayout(pnlManualLayout);
         pnlManualLayout.setHorizontalGroup(
             pnlManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+            .addGroup(pnlManualLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblManual, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlManualLayout.setVerticalGroup(
             pnlManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlManualLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(lblManual)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        pnlAutomatico.setBackground(new java.awt.Color(51, 51, 255));
+        pnlAutomatico.setPreferredSize(new java.awt.Dimension(140, 140));
+        pnlAutomatico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlAutomaticoMouseClicked(evt);
+            }
+        });
+
+        lblAutomatico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAutomatico.setText("Automatico");
+
+        javax.swing.GroupLayout pnlAutomaticoLayout = new javax.swing.GroupLayout(pnlAutomatico);
+        pnlAutomatico.setLayout(pnlAutomaticoLayout);
+        pnlAutomaticoLayout.setHorizontalGroup(
+            pnlAutomaticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+        );
+        pnlAutomaticoLayout.setVerticalGroup(
+            pnlAutomaticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAutomaticoLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(lblAutomatico)
                 .addContainerGap(62, Short.MAX_VALUE))
@@ -98,9 +115,9 @@ public class pnlTipoJuego extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(pnlManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addComponent(pnlAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addComponent(pnlManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -112,11 +129,27 @@ public class pnlTipoJuego extends javax.swing.JPanel {
                 .addComponent(btnVolver)
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pnlManualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlManualMouseClicked
+        if (tombola != null) {
+            tombola.setModoAutomatico(false);
+            System.out.println("Modo de juego cambiado a MANUAL");
+            System.out.print(tombola.getTipoModo());
+        }
+    }//GEN-LAST:event_pnlManualMouseClicked
+
+    private void pnlAutomaticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlAutomaticoMouseClicked
+        if (tombola != null) {
+            tombola.setModoAutomatico(true);
+            System.out.println("Modo de juego cambiado a AUTOMÁTICO");
+            System.out.print(tombola.getTipoModo());
+        }
+    }//GEN-LAST:event_pnlAutomaticoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

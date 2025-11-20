@@ -23,21 +23,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jScrollPane2" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnReiniciar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnReiniciarTablero" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnReiniciarTombola" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="367" max="-2" attributes="0"/>
-                      <Component id="btnBingo" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnReiniciar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnReiniciarTablero" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnReiniciarTombola" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnIniciar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="380" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <Component id="jScrollPane1" min="-2" pref="261" max="-2" attributes="0"/>
@@ -67,8 +61,9 @@
                           <Component id="btnReiniciar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnReiniciarTablero" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnReiniciarTombola" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnIniciar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="97" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="174" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -76,9 +71,7 @@
                           <Component id="btnInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCambiarJuego" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="55" max="32767" attributes="0"/>
-                      <Component id="btnBingo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane3" alignment="1" min="-2" pref="174" max="-2" attributes="0"/>
                           <Component id="jScrollPane4" alignment="1" min="-2" pref="174" max="-2" attributes="0"/>
@@ -112,11 +105,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnBingo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="BINGO"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnReiniciar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reiniciar"/>
@@ -129,6 +117,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reiniciar Tablero"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReiniciarTableroActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
       <AuxValues>
@@ -156,6 +147,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reiniciar Tombola"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReiniciarTombolaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCambiarJuego">
       <Properties>
@@ -166,6 +160,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Inicio"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnIniciar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Iniciar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author pollo
+ * @author Cjared
  */
 public class pnlPrincipal extends javax.swing.JPanel {
 

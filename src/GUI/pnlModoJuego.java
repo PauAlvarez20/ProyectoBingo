@@ -6,12 +6,15 @@ package GUI;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import model.Tombola;
 
 /**
  *
- * @author pollo
+ * @author Cjared
  */
 public class pnlModoJuego extends javax.swing.JPanel {
+
+    private Tombola tombola;
 
     /**
      * Creates new form pnlModoJuego
@@ -36,6 +39,10 @@ public class pnlModoJuego extends javax.swing.JPanel {
         return pnlCuatroEsquinas;
     }
 
+    public void setTombola(Tombola t) {
+        this.tombola = t;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +63,11 @@ public class pnlModoJuego extends javax.swing.JPanel {
 
         pnlCuatroEsquinas.setBackground(new java.awt.Color(255, 51, 51));
         pnlCuatroEsquinas.setPreferredSize(new java.awt.Dimension(140, 140));
+        pnlCuatroEsquinas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlCuatroEsquinasMouseClicked(evt);
+            }
+        });
 
         lblCuatroEsquinas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCuatroEsquinas.setText("Juego Cuatro esquinas");
@@ -76,6 +88,11 @@ public class pnlModoJuego extends javax.swing.JPanel {
 
         pnlCartonLleno.setBackground(new java.awt.Color(153, 153, 255));
         pnlCartonLleno.setPreferredSize(new java.awt.Dimension(140, 140));
+        pnlCartonLleno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlCartonLlenoMouseClicked(evt);
+            }
+        });
 
         lblCartonLleno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCartonLleno.setText("Juego Cartón Lleno");
@@ -95,6 +112,11 @@ public class pnlModoJuego extends javax.swing.JPanel {
         );
 
         pnlCartonNormal.setBackground(new java.awt.Color(102, 255, 51));
+        pnlCartonNormal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlCartonNormalMouseClicked(evt);
+            }
+        });
 
         lblCartonNormal.setText("Juego Normal");
 
@@ -166,6 +188,18 @@ public class pnlModoJuego extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pnlCartonNormalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCartonNormalMouseClicked
+        tombola.setTipoModo(1);
+    }//GEN-LAST:event_pnlCartonNormalMouseClicked
+
+    private void pnlCuatroEsquinasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCuatroEsquinasMouseClicked
+        tombola.setTipoModo(2);
+    }//GEN-LAST:event_pnlCuatroEsquinasMouseClicked
+
+    private void pnlCartonLlenoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCartonLlenoMouseClicked
+        tombola.setTipoModo(3);
+    }//GEN-LAST:event_pnlCartonLlenoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

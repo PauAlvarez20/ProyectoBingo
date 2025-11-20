@@ -4,39 +4,49 @@
  */
 package GUI;
 
-import GUI.pnlBingo;
-import GUI.pnlGeneraCarton;
-import GUI.pnlModoJuego;
-import GUI.pnlPrincipal;
-import GUI.pnlTipoJuego;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
+import model.Carton;
+import model.Tombola;
 
 /**
  *
- * @author pollo
+ * @author Cjared
  */
 public class frmPrincipal extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmPrincipal.class.getName());
     pnlPrincipal panelPrincipal = new pnlPrincipal();
     pnlModoJuego panelModoJuego = new pnlModoJuego();
     pnlGeneraCarton panelGeneraCarton = new pnlGeneraCarton();
     pnlTipoJuego panelTipoJuego = new pnlTipoJuego();
     pnlBingo panelBingo = new pnlBingo();
-    
+
+    private Tombola tombola;
+    private Carton carton1;
+    private Carton carton2;
+    private Carton carton3;
+
     /**
      * Creates new form frmPrincipal
      */
     public frmPrincipal() {
         initComponents();
-        
+
+        tombola = new Tombola(false);
+        carton1 = new Carton("C1");
+        carton2 = new Carton("C2");
+        carton3 = new Carton("C3");
+
+        // ENVIAR OBJETOS A LOS PANELS
+        inyectarDependencias();
+
         mostrarPanel(panelPrincipal);
 
         eventosNavegacion();
     }
-    
+
     private void mostrarPanel(JPanel panel) {
         setContentPane(panel);
         revalidate();
@@ -45,56 +55,170 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void eventosNavegacion() {
 
-        // pnlPrincipal → pnlModoJuego
+        // pnlPrincipal - pnlModoJuego
         panelPrincipal.getBtnJugar().addActionListener(e -> {
+            inyectarDependencias();
             mostrarPanel(panelModoJuego);
         });
 
-        // pnlModoJuego → pnlGeneraCarton
+        // pnlModoJuego - pnlGeneraCarton
         panelModoJuego.getPnlCartonNormal().addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(MouseEvent e) {
-                mostrarPanel(panelGeneraCarton);
-            }
-        });
-        
-        panelModoJuego.getPnlCartonLleno().addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(MouseEvent e) {
-                mostrarPanel(panelGeneraCarton);
-            }
-        });
-        
-        panelModoJuego.getPnlCuatroEsquinas().addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(MouseEvent e) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                inyectarDependencias();
                 mostrarPanel(panelGeneraCarton);
             }
         });
 
-        // pnlGeneraCarton → pnlTipoJuego
+        panelModoJuego.getPnlCartonLleno().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                inyectarDependencias();
+                mostrarPanel(panelGeneraCarton);
+            }
+        });
+
+        panelModoJuego.getPnlCuatroEsquinas().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                inyectarDependencias();
+                mostrarPanel(panelGeneraCarton);
+            }
+        });
+
+        // pnlGeneraCarton - pnlTipoJuego
         panelGeneraCarton.getBtnGuardar().addActionListener(e -> {
+            inyectarDependencias();
             mostrarPanel(panelTipoJuego);
         });
 
-        // pnlTipoJuego → pnlBingo
+        // pnlTipoJuego - pnlBingo
         panelTipoJuego.getPnlAutomatico().addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(MouseEvent e) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                inyectarDependencias();
                 mostrarPanel(panelBingo);
+                panelBingo.cargarDatos();
+                panelBingo.configurarEventosCartones();
             }
         });
-        
+
         panelTipoJuego.getPnlManual().addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(MouseEvent e) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                inyectarDependencias();
+                imprimirEstadoCartones();
+                panelBingo.cargarDatos();
+                panelBingo.configurarEventosCartones();
                 mostrarPanel(panelBingo);
             }
         });
 
-        // Todos los volver → pnlModoJuego
-        panelModoJuego.getBtnVolver().addActionListener(e -> mostrarPanel(panelPrincipal)); // Solo este vuelve al inicio
-        panelGeneraCarton.getBtnVolver().addActionListener(e -> mostrarPanel(panelModoJuego));
-        panelTipoJuego.getBtnVolver().addActionListener(e -> mostrarPanel(panelModoJuego));
+        // Todos los volver - pnlModoJuego
+        panelModoJuego.getBtnVolver().addActionListener(e -> {
+            inyectarDependencias();
+            mostrarPanel(panelPrincipal);
+        });
+
+        panelGeneraCarton.getBtnVolver().addActionListener(e -> {
+            inyectarDependencias();
+            mostrarPanel(panelModoJuego);
+        });
+
+        panelTipoJuego.getBtnVolver().addActionListener(e -> {
+            inyectarDependencias();
+            mostrarPanel(panelModoJuego);
+        });
 
         // pnlBingo botones de volver
-        panelBingo.getBtnInicio().addActionListener(e -> mostrarPanel(panelPrincipal));
-        panelBingo.getBtnCambiarJuego().addActionListener(e -> mostrarPanel(panelModoJuego));
+        panelBingo.getBtnInicio().addActionListener(e -> {
+            inyectarDependencias();
+            mostrarPanel(panelPrincipal);
+        });
+
+        panelBingo.getBtnCambiarJuego().addActionListener(e -> {
+            inyectarDependencias();
+            mostrarPanel(panelModoJuego);
+        });
+    }
+
+    private void inyectarDependencias() {
+
+        // ---- Paneles que usan SOLO Tómbola ----
+        panelModoJuego.setTombola(tombola);
+        panelTipoJuego.setTombola(tombola);
+        panelBingo.setTombola(tombola);
+        panelGeneraCarton.setTombola(tombola);
+
+        // ---- Paneles que usan LOS TRES CARTONES ----
+        panelGeneraCarton.setCartones(carton1, carton2, carton3);
+        panelBingo.setCartones(carton1, carton2, carton3);
+
+        //imprimirEstadoTombola();
+    }
+
+    private void imprimirEstadoCartones() {
+
+        System.out.println("\n================= ESTADO DE LOS CARTONES =================");
+
+        imprimirCarton("CARTÓN 1", carton1);
+        imprimirCarton("CARTÓN 2", carton2);
+        imprimirCarton("CARTÓN 3", carton3);
+
+        System.out.println("==========================================================\n");
+    }
+
+    private void imprimirEstadoTombola() {
+
+        System.out.println("----- ESTADO ACTUAL DE LA TÓMBOLA -----");
+
+        System.out.println("Modo automático: " + tombola.isModoAutomatico());
+        System.out.println("Último número: " + tombola.getUltimoNumero());
+        System.out.println("TipoModo: " + tombola.getTipoModo());
+
+        System.out.println("\n--- MATRIZ DE NÚMEROS ---");
+        int[][] nums = tombola.getNumeros();
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 15; j++) {
+                System.out.print(nums[i][j] + "\t");
+            }
+            System.out.println();
+        }
+
+        System.out.println("\n--- MATRIZ DE MARCADOS ---");
+        boolean[][] marc = tombola.getMarcados();
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 15; j++) {
+                System.out.print((marc[i][j] ? "1" : "0") + "\t");
+            }
+            System.out.println();
+        }
+
+        System.out.println("----------------------------------------");
+    }
+
+    private void imprimirCarton(String titulo, Carton c) {
+
+        System.out.println("\n----- " + titulo + " (" + c.getId() + ") -----");
+
+        int[][] nums = c.getNumeros();
+        boolean[][] marc = c.getMarcados();
+
+        System.out.println("NÚMEROS:");
+        for (int f = 0; f < 5; f++) {
+            for (int col = 0; col < 5; col++) {
+                System.out.printf("%3d\t", nums[f][col]);
+            }
+            System.out.println();
+        }
+
+        System.out.println("MARCADOS:");
+        for (int f = 0; f < 5; f++) {
+            for (int col = 0; col < 5; col++) {
+                System.out.print(marc[f][col] ? "1\t" : "0\t");
+            }
+            System.out.println();
+        }
     }
 
     /**

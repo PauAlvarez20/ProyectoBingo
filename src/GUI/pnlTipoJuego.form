@@ -18,9 +18,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="pnlManual" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="161" max="32767" attributes="0"/>
               <Component id="pnlAutomatico" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="161" max="32767" attributes="0"/>
+              <Component id="pnlManual" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
@@ -35,8 +35,8 @@
               <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlManual" min="-2" max="-2" attributes="0"/>
                   <Component id="pnlAutomatico" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnlManual" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="97" max="32767" attributes="0"/>
           </Group>
@@ -44,7 +44,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="pnlAutomatico">
+    <Container class="javax.swing.JPanel" name="pnlManual">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="33" type="rgb"/>
@@ -53,6 +53,9 @@
           <Dimension value="[140, 140]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlManualMouseClicked"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -83,7 +86,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="pnlManual">
+    <Container class="javax.swing.JPanel" name="pnlAutomatico">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="33" type="rgb"/>
@@ -92,6 +95,9 @@
           <Dimension value="[140, 140]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlAutomaticoMouseClicked"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
